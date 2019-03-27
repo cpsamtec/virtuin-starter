@@ -1,0 +1,55 @@
+collectionName: Virtuin_Starter
+collectionTag: v0.0.2
+build: development
+taskGroups:
+- name: Group One
+  description: Description of the first group of tasks
+  autoStart: false
+  mode: user
+  tasks:
+  - name: First in Sequence
+    description: Description of the current example process
+    dockerInfo:
+      serviceName: example-one
+      command: python3.7
+      type: exec
+      args:
+      - /usr/src/app/run.py
+    data:
+      helloMessage: Hello from the first process of the starter
+      virt_stations:
+        VIRT_DEFAULT_STATION:
+          count: 5
+          helloMessage: This overrides the helloMessage in the default station
+    viewURL: http://localhost:3000
+stationCollectionEnvPaths:
+  VIRT_DEFAULT_STATION: "/station's/full/path/to/this/directory"
+dockerCompose:
+  source:
+    version: '3'
+    services:
+      output-server:
+        image: nginx
+        network_mode: bridge
+        ports:
+        - 8080:80
+        volumes:
+        - outputFiles:/usr/share/nginx/html:ro
+      example-one:
+        build: ${VIRT_COLLECTION_ENV_PATH}/src/one
+        network_mode: host
+        command:
+        - bash
+        - -c
+        - 'trap : TERM INT; sleep infinity & wait'
+        volumes:
+        - ${VIRT_COLLECTION_ENV_PATH}/src:/src
+        - outputFiles:/outputFiles
+        environment:
+        - VIRT_STATION_NAME
+        - VIRT_GUI_SERVER_ADDRESS
+        - VIRT_REST_API_PORT
+        - AWS_ACCESS_KEY_ID
+        - AWS_SECRET_ACCESS_KEY
+    volumes:
+      outputFiles:
