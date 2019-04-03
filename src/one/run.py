@@ -1,3 +1,10 @@
+"""
+
+ This example will demonstrate reading the input file, sending messages,
+ displaying prompts, and updating progress.
+
+"""
+
 import requests
 import json
 import os
@@ -53,13 +60,11 @@ class VirtuinEnv:
                 parsedJson = json.loads(r.text)
                 if parsedJson["success"]:
                     return (True, parsedJson["userResponse"])
-                if parsedJson["success"]:
-                    return (False, parsedJson["message"])
+                else:
+                    return (False, parsedJson.get("message", "unknown error"))
             except Exception as e:
                 print('could not perform prompt. error {}'.format(str(e)))
                 return (False, "")
-
-
 
 
 virtuinEnv = VirtuinEnv()
