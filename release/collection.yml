@@ -1,0 +1,88 @@
+collectionName: Virtuin_Starter
+collectionTag: v0.0.2
+build: release
+taskGroups:
+- name: Group One
+  description: Description of the first group of tasks
+  autoStart: false
+  mode: user
+  tasks:
+  - name: First in Group
+    description: Description of the current example process
+    dockerInfo:
+      serviceName: example-one
+      command: python3.7
+      type: exec
+      args:
+      - /usr/src/app/run.py
+    data:
+      helloMessage: Hello from the first process of the starter
+      virt_stations:
+        VIRT_DEFAULT_STATION:
+          count: 5
+          helloMessage: This overrides the helloMessage in the default station
+    viewURL: http://localhost:3000
+- name: Group Two
+  description: Description of the second group of tasks
+  autoStart: false
+  mode: managed
+  tasks:
+  - name: First in Group 2
+    description: Description of the second process
+    dockerInfo:
+      serviceName: example-two
+      command: python3.7
+      type: exec
+      args:
+      - /usr/src/app/run.py
+      - 1
+  - name: Second in Group 2
+    description: Description of second process
+    dockerInfo:
+      serviceName: example-two
+      command: python3.7
+      type: exec
+      args:
+      - /usr/src/app/run.py
+      - 2
+stationCollectionEnvPaths:
+  VIRT_DEFAULT_STATION: "/station's/full/path/to/this/directory"
+dockerCompose:
+  source:
+    version: '3'
+    services:
+      output-server:
+        image: nginx
+        network_mode: bridge
+        ports:
+        - 8080:80
+        volumes:
+        - outputFiles:/usr/share/nginx/html:ro
+      example-one:
+        image: cpsamtec/virt-example-one
+        network_mode: host
+        command:
+        - bash
+        - -c
+        - 'trap : TERM INT; sleep infinity & wait'
+        volumes:
+        - outputFiles:/outputFiles
+        environment:
+        - VIRT_STATION_NAME
+        - VIRT_GUI_SERVER_ADDRESS
+        - VIRT_REST_API_PORT
+      example-two:
+        image: cpsamtec/virt-example-one
+        network_mode: host
+        command:
+        - bash
+        - -c
+        - 'trap : TERM INT; sleep infinity & wait'
+        volumes:
+        - outputFiles:/outputFiles
+        environment:
+        - VIRT_STATION_NAME
+        - VIRT_GUI_SERVER_ADDRESS
+        - VIRT_REST_API_PORT
+    volumes:
+      outputFiles:
