@@ -2,18 +2,33 @@
 
 # Virtuin Starter
 
-This repo contains a simple outline to begin creating tasks and applications in
+This repo contains a simple starter to begin creating tasks and applications in
 Virtuin. The tasks are currently written in python, however you can use whatever
-tools and platforms you feel are best.
+tools and platforms you prefer.
 
+### To Begin
 
-To begin using
 * clone this repo
 * set VIRT_STATION_NAME on your computer globally to VIRT_DEFAULT_STATION
   - open collection.yml at the root
   - change the value of **stationCollectionEnvPaths -> VIRT_DEFAULT_STATION** with the absolute path of this repo.
   - you can change station name later and modify stationCollectionEnvPaths appropriately
-* load the collection.yml from the Virtuin GUI
+* load the root collection.yml from the Virtuin GUI
+
+
+### Contents
+
+- collection.env : currently empty, however environment variables can be added
+as needed.
+- collection.yml : development collection with two groups of tasks. First group
+has one task, which can be run as needed by the operator. Second group is managed
+so the REST API is used to enable and reset the status of tasks. The *dockerCompose*
+consists of an nginx web service so that files can be retrieved from the docker environment.
+It also consists of two services to build from source. Each of which contain the executables to
+run as *Tasks*. The path's use
+**VIRT_COLLECTION_ENV_PATH**, which will be set the corresponding path of
+matching station name in **stationCollectionEnvPaths**.
+
 
 see [Virtuin](https://github.com/cpsamtec/virtuin) documentation for more help
 
@@ -49,5 +64,5 @@ stations.
 
 If you are using private images make sure to have appropriate docker login credentials set in the collection.env of each station the application will be running.
 
-The collection is currently a *development* build. To see a release version of the
-collection.yml see the release folder.
+The root collection is a *development* build. To see a release version of the
+collection.yml view the release folder.
