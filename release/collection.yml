@@ -45,8 +45,6 @@ taskGroups:
       args:
       - /usr/src/app/run.py
       - 2
-stationCollectionEnvPaths:
-  VIRT_DEFAULT_STATION: "/station's/full/path/to/this/directory"
 dockerCompose:
   source:
     version: '3'

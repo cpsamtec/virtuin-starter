@@ -45,8 +45,6 @@ taskGroups:
       args:
       - /usr/src/app/run.py
       - 2
-stationCollectionEnvPaths:
-  VIRT_DEFAULT_STATION: "/station's/full/path/to/this/directory"
 dockerCompose:
   source:
     version: '3'
@@ -59,28 +57,28 @@ dockerCompose:
         volumes:
         - outputFiles:/usr/share/nginx/html:ro
       example-one:
-        build: ${VIRT_COLLECTION_ENV_PATH}/src/one
+        build: ${VIRT_PROJECT_SRC}/one
         network_mode: host
         command:
         - bash
         - -c
         - 'trap : TERM INT; sleep infinity & wait'
         volumes:
-        - ${VIRT_COLLECTION_ENV_PATH}/src/one:/src
+        - ${VIRT_PROJECT_SRC}/one:/src
         - outputFiles:/outputFiles
         environment:
         - VIRT_STATION_NAME
         - VIRT_GUI_SERVER_ADDRESS
         - VIRT_REST_API_PORT
       example-two:
-        build: ${VIRT_COLLECTION_ENV_PATH}/src/two
+        build: ${VIRT_PROJECT_SRC}/two
         network_mode: host
         command:
         - bash
         - -c
         - 'trap : TERM INT; sleep infinity & wait'
         volumes:
-        - ${VIRT_COLLECTION_ENV_PATH}/src/two:/src
+        - ${VIRT_PROJECT_SRC}/two:/src
         - outputFiles:/outputFiles
         environment:
         - VIRT_STATION_NAME

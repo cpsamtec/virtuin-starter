@@ -37,7 +37,7 @@ When released all of docker build source will be converted to images placed on d
 hub. Instead of specifying builds in the docker compose, you will specify the
 image.
  A development build
-will display extra features in the GUI. To create a release build
+will display extra features in the GUI. To create a release version
 
 1. change build key value in collection.yml to *release*
 2. build all of your docker src directories and create images
@@ -64,5 +64,5 @@ stations.
 
 If you are using private images make sure to have appropriate docker login credentials set in the collection.env of each station the application will be running.
 
-The root collection is a *development* build. To see a release version of the
+The root collection is set for *development*. To see a release version of the
 collection.yml view the release folder.
