@@ -97,7 +97,7 @@ virtuinEnv.updateProgress(50)
 # now successful lets setup the next task. Check taskNumber, however could
 # also compare against taskIndex.
 if taskNumber == 1:
-    virtuinEnv.displayMessage('First task successfully complete. Enable second')
+    virtuinEnv.displayMessage('First task successfully complete. Enabled second')
     instr = {
         'reset': [1],   # reset status of task 2
         'enable': [1],  # enable task 2
@@ -107,7 +107,7 @@ if taskNumber == 1:
         json.loads(json.dumps(instr))
     )
 else:
-    virtuinEnv.displayMessage('Second task successfully complete. Enable first')
+    virtuinEnv.displayMessage('Second task successfully complete. Enabled first')
     instr = {
         'reset': [0],   # reset status task 1
         'enable': [0],  # enable task 1

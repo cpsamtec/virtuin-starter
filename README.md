@@ -9,10 +9,7 @@ tools and platforms you prefer.
 ### To Begin
 
 * clone this repo
-* set VIRT_STATION_NAME on your computer globally to VIRT_DEFAULT_STATION
-  - open collection.yml at the root
-  - change the value of **stationCollectionEnvPaths -> VIRT_DEFAULT_STATION** with the absolute path of this repo.
-  - you can change station name later and modify stationCollectionEnvPaths appropriately
+* make sure to have docker, docker compose and Virtuin GUI installed
 * load the root collection.yml from the Virtuin GUI
 
 
@@ -26,9 +23,7 @@ so the REST API is used to enable and reset the status of tasks. The *dockerComp
 consists of an nginx web service so that files can be retrieved from the docker environment.
 It also consists of two services to build from source. Each of which contain the executables to
 run as *Tasks*. The path's use
-**VIRT_COLLECTION_ENV_PATH**, which will be set the corresponding path of
-matching station name in **stationCollectionEnvPaths**.
-
+**VIRT_PROJECT_SRC** will be set to the src folder of this directory by Virtuin
 
 see [Virtuin](https://github.com/cpsamtec/virtuin) documentation for more help
 
@@ -44,7 +39,6 @@ will display extra features in the GUI. To create a release version
 3. push the docker images to docker hub
 4. modify your docker compose source section of collection.yml to use the
 images as opposed to the build directories.  
-5. add any known stations with a corresponding collection.env to **stationCollectionEnvPaths**.
 
 ```
 collectionName: Virtuin_Starter
